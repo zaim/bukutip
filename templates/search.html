@@ -5,7 +5,9 @@
 		$(function(){
 			$('.clickable').click(function(e){
 				var url = $(this).find('a.permalink').attr('href');
-				window.location = url;
+				if (url) {
+					window.location = url;
+				}
 			});
 		});
 	</script>
