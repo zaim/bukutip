@@ -43,7 +43,9 @@ class JSONHandler(webapp.RequestHandler):
 
 
 class HTMLHandler(webapp.RequestHandler):
-    """Handles requests that renders jinja templates"""
+    """Handles requests that renders jinja templates
+    """
+    context_processors = []
 
     def get(self, *args, **kwargs):
         template, context = self._get(*args, **kwargs)
@@ -60,6 +62,8 @@ class HTMLHandler(webapp.RequestHandler):
         context = context or {}
         render_context = settings.CONTEXT.copy()
         render_context.update(context)
+        for p in HTMLHandler.context_processors:
+            p(render_context)
         template = env.get_template(template_name)
         self.response.out.write(template.render(render_context))
 
@@ -68,3 +72,8 @@ class HTMLHandler(webapp.RequestHandler):
 
     def _post(self, *args, **kwargs):
         self.error(405)
+
+    @classmethod
+    def register_context_processor(cls, processor):
+        if callable(processor):
+            cls.context_processors.append(processor)

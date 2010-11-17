@@ -412,7 +412,8 @@ form span.error {
 	text-align: center;
 	padding-top: 24px;
 }
-	#bottom a.zw {
+	#bottom a.zw,
+	#bottom p.user a {
 		color: #CCCCCC;
 		font-weight: bold;
 	}
