@@ -3,9 +3,9 @@
 {% block head %}
 	<script type="text/javascript">
 		$(function(){
-			$('.clickable').click(function(){
+			$('.clickable').click(function(e){
 				var url = $(this).find('a.permalink').attr('href');
-				console.log(url);
+				window.location = url;
 			});
 		});
 	</script>
