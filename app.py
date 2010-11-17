@@ -33,13 +33,11 @@ class SearchHandler(handlers.HTMLHandler):
     def _get(self):
         query = self.request.get('q', '').strip()
 
-        # immediately redirect to book page if given an ISBN as query
+        # modify query to do an ISBN: keyword search if given query is one
         if models.Book.ISBN13_REGEX.match(query) or models.Book.ISBN10_REGEX.match(query):
             isbn = pyisbn.convert(query) if len(query) == 10 else query
-            self.redirect('/%s' % isbn)
-            return (None, None)
+            query = 'isbn:%s' % isbn
 
-        # otherwise, do a google book search
         context = {
             "page_title": u'Search: "%s"' % query,
             "page_id": 'search',
@@ -53,48 +51,65 @@ class SearchHandler(handlers.HTMLHandler):
             # if only has 1 result, immediately save and redirect
             if len(results) == 1:
                 # no need to update=True since google book search results
-                # rarely chagne...
-                store_books(results, update=False)
+                # rarely change...
+                models.store_books(results, update=False)
                 self.redirect('/%s' % results['isbn13'])
                 return (None, None)
 
             # convert the resulting dict objects into temporary faux Book
             # entities for use in the template, then defer the actual
-            # creation of the entities to a bg task
+            # creation of the entities to BookHandler
+            cache = {}
             for res in results:
                 res['permalink'] = '/%s' % res['isbn13']
-                res['links'] = defaultdict(lambda : '')
+                res['links'] = {}
                 for ln in res.get('_links', []):
                     res['links'][ln['name']] = ln['url']
-            context['books'] = results
+                cache['booktmp:%s' % res['isbn13']] = res
 
-            # store books...
-            logging.info('SearchHandler: storing of %d results' % len(results))
-            models.store_books(results, update=False)
+            # temporarily cache the dicts for later saving in BookHandler
+            # we give the user 20 minutes to browse/search before
+            # clicking a book
+            memcache.set_multi(cache, 1200)
+            context['books'] = results
 
         return ('search.html', context)
 
 
 class BookHandler(handlers.HTMLHandler):
     def _get(self, isbn):
-        book  = models.Book.get_by_isbn(isbn, create=False)
-        title = 'Book %s not found' % isbn
+        context = {
+            "isbn": isbn,
+            "page_title": 'Book %s not found' % isbn,
+            "book": None,
+            "shops": bookshop.SHOPS.keys()
+        }
 
-        if not book or not book.google_id or not book.amazon_id:
+        # 1) directly from memcache or datastore
+        book = models.Book.get_by_isbn(isbn, create=False)
+        results = []
+
+        if not book:
+            # 2) from "booktmp" cached during session in SearchHandler
+            key = 'booktmp:%s' % isbn
+            book_dict = memcache.get(key)
+            if book_dict:
+                results = [book_dict]
+                memcache.delete(key)
+
+        # 3) actual google/amazon search
+        if (not book and not results) or (book and (not book.google_id or not book.amazon_id)):
             results = booksearch.search('isbn:%s' % isbn)
-            if results:
-                # set update=True since this could be a direct page visit
-                # and no book details have been stored yet (i.e. book info
-                # saved during crawling)
-                books = models.store_books(results, update=True)
-                if books:
-                    book = books[0]
 
-        if book:
-            title = book.title
+        # store or update the book
+        if results:
+            book = models.store_books(results, update=True)
+            book = book[0] if book else None
 
-        return ('view.html', {"isbn":isbn, "book":book, "page_title":title,
-                              "shops":bookshop.SHOPS.keys()})
+        context['book'] = book
+        context['page_title'] = book.title if book else title
+
+        return ('view.html', context)
 
 
 class FeedbackHandler(handlers.HTMLHandler):
