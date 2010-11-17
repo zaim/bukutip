@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block head %}
+	<script type="text/javascript">
+		$(function(){
+			$('.clickable').click(function(){
+				var url = $(this).find('a.permalink').attr('href');
+				console.log(url);
+			});
+		});
+	</script>
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<header id="top">
+			<h1 id="logo"><a href="/">{{ site_title }}</a></h1>
+			<form method="get" action="/search">
+				<div class="search-bar"><input type="text" name="q" id="q" autofocus{% if query %} value="{{ query }}"{% endif %}/><input type="submit" value="Search"/></div>
+			</form>
+			{% if books %}
+			<h2 class="normal tight">Select a book to compare its prices:</h2>
+			{% endif %}
+		</header>
+		<section id="content">
+			{% for book in books %}
+			<article class="book clickable" id="book-{{ book.isbn13 }}">
+				<div class="image{% if not book.links.thumbnail %} no-thumb{% endif %}">
+					<a href="{{ book.permalink }}" class="permalink">{% if book.links.thumbnail %}<img src="{{ book.links.thumbnail }}"/>{% else %}No image{% endif %}</a>
+				</div>
+				<div class="info">
+					<h1 class="normal tight"><a href="{{ book.permalink }}" class="title permalink">{{ book.title }}</a></h1>
+					<h2 class="small tight">
+						by <span class="authors">{{ book.authors|join(', ') }}</span>
+						{% if book.published_date %}<span class="published-date">({{ book.published_date.year }})</span>{% endif %}
+					</h2>
+					<p class="description tight">{% if book.description %}{{ book.description }}{% else %}<em>No description</em>{% endif %}</p>
+				</div>
+			</article>
+			{% else %}
+			<h2>No books found, sorry.</h2>
+			{% endfor %}
+		</section>
+	</div>
+{% endblock %}

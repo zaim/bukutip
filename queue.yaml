@@ -1,0 +1,5 @@
+queue:
+- name: default
+  rate: 2/s
+- name: downloader
+  rate: 30/m

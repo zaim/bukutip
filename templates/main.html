@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block head %}
+	<script type="text/javascript">
+		$(function(){
+			var q = $('#q'),
+			    b = $('#search div.search-bar');
+			q.focus(function(){b.addClass('focused');})
+			 .blur(function(){b.removeClass('focused');});
+			if (!("autofocus" in document.createElement("input"))) {
+				q.focus();
+			}
+		});
+	</script>
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<header>
+			<h1 id="logo">{{ site_title }}</h1>
+		</header>
+		<section id="content">
+			<p class="big">Search and compare book prices from various bookstores in Malaysia.</p>
+			<p class="tight">Enter an ISBN, book title and/or author:</p>
+		</section>
+		<section id="search">
+			<form method="get" action="/search">
+				<div class="search-bar"><input type="text" name="q" id="q" autofocus/><input type="submit" value="Search"/></div>
+			</form>
+			<p class="small">( Includes latest prices from MPH, Kinokuniya, Times, BookXcess and more )</p>
+		</section>
+	</div>
+{% endblock %}

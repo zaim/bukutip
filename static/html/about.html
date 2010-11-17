@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="width=device-width; initial-scale=1"/>
+	<meta name="description" content="Search and compare book prices in Malaysia. MPH, Kinokuniya, Times, Bookxcess and more."/>
+	<title>BukuTip &ndash; About</title>
+	<link rel="shortcut icon" href="/favicon.ico"/>
+	<link rel="stylesheet" media="all" href="/static/css/main.css?v=001d.1"/>
+	<script src="http://cachedcommons.org/cache/json2/0.0.0/javascripts/json2-min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-19728872-1']);
+		_gaq.push(['_trackPageview']);
+		(function() {
+		  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+</head>
+<body id="about">
+	<div class="container">
+		<header id="top">
+			<h1 id="logo"><a href="/">BukuTip</a></h1>
+			<form method="get" action="/search">
+				<div class="search-bar"><input type="text" name="q" id="q" autofocus/><input type="submit" value="Search"/></div>
+			</form>
+		</header>
+		<section id="content">
+			<h1>About BukuTip</h2>
+			<p>
+				Welcome! BukuTip is a free web app that searches for and
+				compare book prices from various bookstores and websites in
+				Malaysia.
+			</p>
+			<h2>Which bookstores?</h2>
+			<p>For now, BukuTip searches these bookstores and websties:</p>
+			<ul>
+				<li><a href="http://www.bookxcess.com/">BookXcess</a></li>
+				<li><a href="http://bookweb.kinokuniya.co.jp/indexohb.cgi?AREA=05">Kinokuniya Malaysia</a></li>
+				<li><a href="http://www.mphonline.com/">MPH</a></li>
+				<li><a href="http://www.mudah.my/">Mudah.my</a></li>
+				<li><a href="http://www.timesbookstore.com.my/">Times Bookstores</a></li>
+			</ul>
+			<h2>How's it done?</h2>
+			<p>
+				BukuTip simply does a direct search on each of the above
+				bookstore's website for a book based on its
+				<a href="http://en.wikipedia.org/wiki/ISBN">ISBN</a> code and
+				parses (or <a href="http://en.wikipedia.org/wiki/Web_scraping">scrapes</a>)
+				for the price value.
+			</p>
+			<p class="small note">
+				Note for bookstore webmasters: please contact BukuTip if you'd
+				like to know more about how we scrape you or if you'd like
+				your bookstore to be featured also.
+			</p>
+			<h2>Contact</h2>
+			<p>
+				BukuTip is built by <a href="http://twitter.com/zaim">Zaim Bakar</a>.
+				For feedback, questions, or other inquiries, please contact
+				<a href="mailto:zaimworks@gmail.com">zaimworks@gmail.com</a>.
+			</p>
+		</section>
+		<footer id="bottom">
+			<p class="small">
+				<a href="/pages/about.html">About</a> &nbsp;&#9474&nbsp;
+				<a href="/feedback">Feedback</a> &nbsp;&#9474&nbsp;
+				<a href="/pages/terms.html">Terms</a> &nbsp;&#9474&nbsp;
+				<a href="/pages/privacy.html">Privacy</a> &nbsp;&#9474&nbsp;
+				built by <a href="http://twitter.com/zaim" class="zw">zaim</a>
+			</p>
+		</footer>
+	</div>
+</body>
+</html>

@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block body %}
+	<div class="container">
+		<header id="top">
+			<h1 id="logo"><a href="/">{{ site_title }}</a></h1>
+			<form method="get" action="/search">
+				<div class="search-bar"><input type="text" name="q" id="q" autofocus/><input type="submit" value="Search"/></div>
+			</form>
+		</header>
+		<section id="content">
+			<h1>Send Feedback</h2>
+			<p class="hello">
+				You can send feedback, questions or other enquiries
+				directly to me (Zaim), the BukuTip Developer via email,
+				twitter or the form below.
+			</p>
+			<ul>
+				<li>Email: <a href="mailto:zaimworks@gmail.com">zaimworks@gmail.com</a></li>
+				<li>Twitter: <a href="http://twitter.com/zaim">@zaim</a></li>
+			</ul>
+			<form method="post" action="/feedback/send">
+				<h2 class="tight">Feedback Form</h2>
+				<p class="help">All fields are required.</p>
+				{% if message_sent %}
+				<p class="msg">
+					Your message have been sent!
+				</p>
+				{% endif %}
+				<p class="field">
+					<label for="name">Your name</label><br/>
+					{% if errors.name %}<span class="error">Please enter name</span>{% endif %}
+					<input type="text" id="name" name="name" value="{{ fields.name }}"/>
+				</p>
+				<p class="field">
+					<label for="email">Your email address</label><br/>
+					{% if errors.email %}<span class="error">Please enter email</span>{% endif %}
+					<input type="email" id="email" name="email" value="{{ fields.email }}"/>
+				</p>
+				<p class="field">
+					<label for="message">Your message, feedback, etc.</label><br/>
+					{% if errors.message %}<span class="error">Please enter message</span>{% endif %}
+					<textarea id="messsage" name="message" cols="45" rows="12">{{ fields.message }}</textarea>
+				</p>
+				<p class="submit">
+					<input type="submit" value="Send Message"/>
+				</p>
+			</form>
+		</section>
+	</div>
+{% endblock %}

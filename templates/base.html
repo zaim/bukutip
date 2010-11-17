@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="width=device-width; initial-scale=1"/>
+	<meta name="description" content="{{ site_description }}"/>
+	<title>{{ site_title }} &ndash; {% if page_title %}{{ page_title }}{% else %}{{ site_description }}{% endif %}</title>
+	<link rel="shortcut icon" href="/favicon.ico"/>
+	<link rel="stylesheet" media="all" href="/static/css/main.css?v={{ app_version }}"/>
+	<script src="http://cachedcommons.org/cache/json2/0.0.0/javascripts/json2-min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	{% block head -%}{%- endblock %}
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-19728872-1']);
+		_gaq.push(['_trackPageview']);
+		(function() {
+		  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+</head>
+<body{% if page_id %} id="{{ page_id }}"{% endif %}>
+{% block body %}{% endblock %}
+	<div class="container">
+		<footer id="bottom">
+			<p class="small">
+				<a href="/pages/about.html">About</a> &nbsp;&#9474&nbsp;
+				<a href="/feedback">Feedback</a> &nbsp;&#9474&nbsp;
+				<a href="/pages/terms.html">Terms</a> &nbsp;&#9474&nbsp;
+				<a href="/pages/privacy.html">Privacy</a> &nbsp;&#9474&nbsp;
+				built by <a href="http://twitter.com/zaim" class="zw">zaim</a>
+			</p>
+		</footer>
+	</div>
+</body>
+</html>

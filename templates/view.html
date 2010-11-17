@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+
+{% block head %}
+	<script src="/static/js/bookshop.js" type="text/javascript"></script>
+	<script type="text/javascript">
+		$(function(){
+			$.Bookshop.init("{{ book.isbn13 }}", "{{ book.title }}", "{{ book.authors|join(' ') }}");
+		});
+	</script>
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<header id="top">
+			<h1 id="logo"><a href="/">{{ site_title }}</a></h1>
+			<form method="get" action="/search">
+				<div class="search-bar"><input type="text" name="q" id="q" autofocus/><input type="submit" value="Search"/></div>
+			</form>
+		</header>
+		<section id="content">
+		{% if not book %}
+			<h2>Book with ISBN "{{ isbn }}" not found, sorry.</h2>
+		{% else %}
+			<article class="book" id="book-{{ book.isbn13 }}">
+				<div class="image{% if not book.links.thumbnail %} no-thumb{% endif %}">
+					<span>{% if book.links.thumbnail %}<img src="{{ book.links.thumbnail }}"/>{% else %}No image{% endif %}</span>
+				</div>
+				<div class="info">
+					<h1 class="normal tight">{{ book.title }}</h1>
+					<h2 class="small tight">
+						by <span class="authors">{{ book.authors|join(', ') }}</span>
+						{% if book.published_date %}<span class="published-date">({{ book.published_date.year }})</span>{% endif %}
+					</h2>
+					<p class="description tight">
+						{% if book.description %}{{ book.description }}{% else %}<em>No description</em>{% endif %}
+					</p>
+				</div>
+				<div class="ads">
+					<span>ADS</span>
+				</div>
+				<div class="details">
+					<div class="prices">
+						<div class="wrap">
+							<span class="small" id="wait">Please wait while we grab the prices...</span>
+							<table id="book-{{ book.isbn13 }}-prices">
+							<thead>
+								<tr>
+									<th scope="col">Store</th>
+									<th scope="col">Price</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="bookxcess">
+									<th scope="row">BookXcess</th>
+									<td></td>
+								</tr>
+								<tr class="kinokuniya">
+									<th col="row">Kinokuniya</th>
+									<td></td>
+								</tr>
+								<tr class="mph">
+									<th scope="row">MPH</th>
+									<td></td>
+								</tr>
+								<tr class="mudah">
+									<th scope="row">Mudah.my</th>
+									<td></td>
+								</tr>
+								<tr class="times">
+									<th scope="row">Times Bookstores</th>
+									<td></td>
+								</tr>
+							</tbody>
+						</table></div>
+					</div>
+					{% if book.google_id %}
+					<div class="external google">
+						<div class="wrap">
+							<h3 class="small">Google Books</h3>
+							{% if book.links.info %}<p class="small"><a href="{{ book.links.info }}">Read Reviews</a></p>{% endif %}
+							{% if book.links.preview %}<p class="small"><a href="{{ book.links.preview }}"><img src="http://www.google.com/intl/en/googlebooks/images/gbs_preview_button1.png"/></a></p>{% endif %}
+						</div>
+					</div>
+					{% endif %}
+					{% if book.links.amazon %}
+					<div class="external amazon">
+						<div class="wrap">
+							<h3 class="small">Amazon.com</h3>
+							<p class="small sponsored">Sponsored Link</p>
+							<p class="small"><a href="{{ book.links.amazon }}"><img src="https://images-na.ssl-images-amazon.com/images/G/01/buttons/buy-from-tan.gif"/></a></p>
+						</div>
+					</div>
+					{% endif %}
+				</div>
+			</article>
+		{% endif %}
+		</section>
+	</div>
+{% endblock %}
