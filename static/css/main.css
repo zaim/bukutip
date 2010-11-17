@@ -418,21 +418,17 @@ form span.error {
 		font-weight: bold;
 	}
 
-#gist {
-	background: #EEE;
+#terms p.cc img {
+	float: left;
+	margin-right: 12px;
+}
+#terms li {
+	margin-bottom: 6px;
+}
+#terms li.hl {
+	background: #FFFFDD;
 	padding: 6px;
 }
-	#terms p.cc img {
-		float: left;
-		margin-right: 12px;
-	}
-	#terms li {
-		margin-bottom: 6px;
-	}
-	#terms li.hl {
-		background: #FFFFDD;
-		padding: 6px;
-	}
 
 /*	Layout for smaller screens
  	480px - 767px */
