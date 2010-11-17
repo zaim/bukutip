@@ -53,7 +53,7 @@ class SearchHandler(handlers.HTMLHandler):
                 # no need to update=True since google book search results
                 # rarely change...
                 models.store_books(results, update=False)
-                self.redirect('/%s' % results['isbn13'])
+                self.redirect('/%s' % results[0]['isbn13'])
                 return (None, None)
 
             # convert the resulting dict objects into temporary faux Book
