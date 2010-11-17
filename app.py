@@ -6,13 +6,22 @@ import settings
 import pyisbn
 import models
 from collections import defaultdict
-from google.appengine.api import memcache, mail
+from google.appengine.api import memcache, mail, users
 from google.appengine.ext import webapp, ereporter
 from google.appengine.ext.webapp import util
 from crawler import BookSourceTaskHandler
 from zaim import utils, handlers
 
 ereporter.register_logger()
+
+def set_context(context):
+    context.update({
+        "user": users.get_current_user(),
+        "login_url": users.create_login_url('/', None, 'gmail.com'),
+        "logout_url": users.create_logout_url('/')
+    })
+
+handlers.HTMLHandler.register_context_processor(set_context)
 
 
 class MainHandler(handlers.HTMLHandler):

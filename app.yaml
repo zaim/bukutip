@@ -1,5 +1,5 @@
 application: bukutip
-version: 001d
+version: 002d
 runtime: python
 api_version: 1
 
@@ -25,6 +25,10 @@ handlers:
 - url: /test.*
   script: gaeunit.py
   login: admin
+  
+# login
+- url: /_ah/login_required
+  script: login.py
 
 # main
 - url: /.*

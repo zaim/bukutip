@@ -35,6 +35,12 @@
 				<a href="/pages/privacy.html">Privacy</a> &nbsp;&#9474&nbsp;
 				built by <a href="http://twitter.com/zaim" class="zw">zaim</a>
 			</p>
+			<p class="small user">
+			{% if user %}
+				Logged in as <strong>{{ user.nickname() }}</strong> &nbsp;&#9474&nbsp;
+				<a href="{{ logout_url }}">Logout</a>
+			{% endif %}
+			</p>
 		</footer>
 	</div>
 </body>
