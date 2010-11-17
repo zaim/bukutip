@@ -140,24 +140,32 @@ class Link(db.Model):
 
 class LinkAttribute(object):
     def __init__(self, book):
-        self.book = book
+        self._links_dict = None
+        self._book = book
+
+    @property
+    def _links(self):
+        if not self._links_dict:
+            self._load()
+        return self._links_dict
+
+    def _load(self, max=64):
+        self._links_dict = {}
+        for ln in self._book.link_set.fetch(max):
+            if not ln.url: continue
+            self._links_dict[ln.name] = ln.url
 
     def __len__(self):
-        return self.book.link_set.count()
+        return len(self._links)
 
-    def __getitem__(self, key):
-        link = Link.all().filter('book =', self.book).filter('name =', key).get()
-        if link:
-            return link.url
-        else:
-            raise KeyError('Link named "%s" not found' % key)
+    def __getitem__(self, name):
+        return self._links[name]
 
     def __iter__(self):
-        for ln in self.book.link_set:
-            yield ln
+        return self._links.iteritems()
 
-    def __contains__(self, key):
-        return (Link.all().filter('book =', self.book).filter('name =', key).count() > 0)
+    def __contains__(self, name):
+        return (name in self._links)
 
 
 class Price(db.Model):
