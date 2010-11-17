@@ -36,3 +36,6 @@ handlers:
 
 builtins:
 - appstats: on
+
+error_handlers:
+- file: static/html/error.html
