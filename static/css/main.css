@@ -379,7 +379,7 @@ form span.error {
 	background-position: 0 3px;
 	background-image: url('../img/bukutip-logo-sm.png');
 	float: left;
-	height: 35px;
+	height: 43px;
 	margin-bottom: 0;
 	margin-right: 10px;
 	width: 112px;
@@ -428,6 +428,10 @@ form span.error {
 #terms li.hl {
 	background: #FFFFDD;
 	padding: 6px;
+}
+
+#about p.beta {
+	color: #777777;
 }
 
 /*	Layout for smaller screens
