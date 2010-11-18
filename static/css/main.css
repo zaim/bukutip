@@ -433,6 +433,11 @@ form span.error {
 #about p.beta {
 	color: #777777;
 }
+#about p.blog-link {
+	background: #EEE;
+	text-align: center;
+	padding: 6px;
+}
 
 /*	Layout for smaller screens
  	480px - 767px */
