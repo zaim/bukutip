@@ -155,11 +155,10 @@ class PriceHandler(handlers.JSONHandler):
 
         title  = self.request.get('title').strip()
         author = self.request.get('author').strip()
+        defaults = {"isbn13":isbn, "title":title, "authors":[author]}
 
-        if self.request.get('dbg'):
-            return self._debug(isbn, shop, title, author)
-
-        book = models.Book.get_by_isbn(isbn, defaults={'title':title, 'authors':[author]})
+        # get/create book object
+        book = models.Book.get_by_isbn(isbn, defaults=defaults)
 
         # find in memcache/db first...
         prices = models.Price.find_for_book(book, shop)
@@ -167,11 +166,11 @@ class PriceHandler(handlers.JSONHandler):
             return prices
 
         # none found, so do actual page/scrape lookup
-        prices  = bookshop.find(shop, isbn, title, author)
+        prices  = bookshop.find(shop, defaults)
         objects = []
         if prices:
-            # bookshop.find might return actual Price entities or just simple
-            # dictionaries, separate the dicts and store them to get the
+            # bookshop.find might return actual Price entities or just faux
+            # dicts, separate the dicts and store them to get the
             # corresponding entities
             dicts = []
             for p in prices:
@@ -183,10 +182,6 @@ class PriceHandler(handlers.JSONHandler):
             objects.extend(models.store_prices(dicts, update=True))
 
         return objects
-
-    def _debug(self, isbn, shop, title, author):
-        prices, parser = bookshop.find(shop, isbn, title, author, debug=True)
-        return prices
 
 
 application = webapp.WSGIApplication([
