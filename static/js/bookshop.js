@@ -63,9 +63,9 @@
 			}, 'application/json');
 		});
 
-		rows.click(function(){
+		rows.click(function(e){
 			var row = $(this);
-			if (!row.hasClass('loaded')) {
+			if (!row.hasClass('loaded') || e.tagName.toUpperCase() == 'A') {
 				return;
 			}
 			var url = row.find('a').attr('href');

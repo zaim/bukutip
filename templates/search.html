@@ -1,17 +1,19 @@
 {% extends "base.html" %}
 
-{% block head %}
+{% block head -%}
 	<script type="text/javascript">
 		$(function(){
 			$('.clickable').click(function(e){
-				var url = $(this).find('a.permalink').attr('href');
-				if (url) {
-					window.location = url;
+				if (e.target.tagName.toUpperCase() != 'A') {
+					var url = $(this).find('a.permalink').attr('href');
+					if (url) {
+						window.location = url;
+					}
 				}
 			});
 		});
 	</script>
-{% endblock %}
+{%- endblock %}
 
 {% block body %}
 	<div class="container">
