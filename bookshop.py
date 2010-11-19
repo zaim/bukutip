@@ -6,6 +6,7 @@ import urllib2
 from datetime import datetime
 from google.appengine.api import urlfetch
 from BeautifulSoup import SoupStrainer, BeautifulSoup, BeautifulStoneSoup
+from models import Book, Price
 
 RE_RM  = re.compile(r'^\s*(?P<currency>RM|MYR).*')
 RE_RMV = re.compile(r'^\s*(?P<currency>RM|MYR)\s*(?P<price>[0-9\.]+)')
@@ -123,7 +124,7 @@ def mudah(content, book, debug=False):
 # find books from datastore, which are already populated during bookxcess pdf
 # crawling cron tasks
 @shop(None)
-def bookxcess(book):
+def bookxcess(book, debug=False):
     obj = Book.get_by_isbn(book['isbn13'], defaults=book)
     prices = Price.find_for_book(obj, 'bookxcess')
     if prices:
