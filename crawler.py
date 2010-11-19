@@ -9,11 +9,13 @@ from google.appengine.ext import webapp
 from google.appengine.ext.deferred import deferred
 from BeautifulSoup import BeautifulSoup, BeautifulStoneSoup
 from models import Document, store_books
-from zaim import pdf2text, utils
+from zaim import pdf2text
 from zaim.titlecase import titlecase
 
-RE_FLOAT  = re.compile(r'([0-9\.]+)$')
-BOOKXCESS = 'http://www.bookxcess.com/'
+RE_FLOAT   = re.compile(r'([0-9\.]+)$')
+RE_NEWLINE = re.compile(r'(\r|\n)+')
+BOOKXCESS  = 'http://www.bookxcess.com/'
+
 PDF_PROCESS_PAGES = 2
 
 
@@ -40,7 +42,7 @@ def parse_mph_rss(document, headers, filename=None):
                     if field == 'authors':
                         value = [value,]
                     elif not field == 'description':
-                        value = utils.RE_NEWLINE.sub(' ', value)
+                        value = RE_NEWLINE.sub(' ', value)
                     book[field] = value
             else:
                 book[field] = None

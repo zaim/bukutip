@@ -10,10 +10,10 @@ from collections import defaultdict
 from datetime import datetime
 from email.utils import formatdate
 from hashlib import sha1
-from google.appengine.api import memcache
+from google.appengine.api import memcache, urlfetch
 from google.appengine.ext import db
 from google.appengine.ext.deferred import deferred
-from zaim import utils, urlnorm
+from zaim import urlnorm
 
 
 class NormalizedLinkProperty(db.LinkProperty):
@@ -258,10 +258,7 @@ class Document(db.Model):
 
     @classmethod
     def download(cls, url, headers=None, getinfo=False):
-        doc  = Document.get_by_url(url)
-        resp = None
-        info = {}
-        mod  = True
+        doc = Document.get_by_url(url)
 
         headers = headers or {}
         if doc.last_updated:
@@ -269,25 +266,30 @@ class Document(db.Model):
         if doc.etag:
             headers['ETag'] = doc.etag
 
-        try:
-            resp = utils.download(url, headers=headers)
-        except urllib2.HTTPError, e:
-            if e.code == 304:  # not modified
-                resp = e
-                mod  = False
-            else: raise
+        #try:
+        #    resp = utils.download(url, headers=headers)
+        #except urllib2.HTTPError, e:
+        #    if e.code == 304:  # not modified
+        #        resp = e
+        #        mod  = False
+        #    else: raise
+        #
+        #if resp:
+        #    info = dict(resp.info().items())
+        #    if mod:
+        #        doc.contents = resp.read()
+        #        doc.last_updated = datetime.utcnow()
 
-        if resp:
-            info = dict(resp.info().items())
-            if mod:
-                doc.contents = resp.read()
-                doc.last_updated = datetime.utcnow()
+        resp = urlfetch.fetch(url, headers=headers)
+        if resp.status_code == 200:
+            doc.contents = resp.content
+            doc.last_updated = datetime.utcnow()
 
         doc.put()
         memcache.set(doc.memkey, doc, Document.MEMCACHE_TTL)
 
         if getinfo:
-            return (doc, info)
+            return (doc, resp.headers)
         else:
             return (doc)
 

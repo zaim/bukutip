@@ -10,7 +10,7 @@ from google.appengine.api import memcache, mail, users
 from google.appengine.ext import webapp, ereporter
 from google.appengine.ext.webapp import util
 from crawler import BookSourceTaskHandler
-from zaim import utils, handlers
+from zaim import handlers
 
 ereporter.register_logger()
 
