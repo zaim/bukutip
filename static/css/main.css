@@ -176,165 +176,160 @@ div.search-bar.focused {
 		width: 74px /*50px;*/
 	}
 
-article.book {
-	border-top: 1px dotted #CCC;
-	clear: both;
-	padding: 24px 12px;
-}
-article.book.clickable:hover {
-	background-color: #F2F9E6;
-	box-shadow: 0 0 3px #8DBB2F;
-	-moz-box-shadow: 0 0 3px #8DBB2F;
-	-webkit-box-shadow: 0 0 3px #8DBB2F;
-	cursor: pointer;
-}
-	article.book a.title {
-		text-decoration: none;
-	}
-	article.book > div.image,
-	article.book > div.info {
-		display: table-cell;
-	}
-	article.book > div.image {
-		float: left;
-		font-size: 13px;
-		line-height: 16px;
-		margin-right: 20px;
-		text-align: center;
-		width: 60px;
+article.book {}
+	article.book > header {
+		border-top: 1px dotted #CCC;
 		overflow: hidden;
+		padding: 20px 12px;
+		width: 596px;
 	}
-		article.book > div.image > a {
-			color: #8DBB2F;
+	article.book:first-child > header {
+		border-top: 0;
+	}
+	article.book.clickable:hover > header {
+		background-color: #F2F9E6;
+		box-shadow: 0 0 12px #BCDD77;
+		-moz-box-shadow: 0 0 12px #BCDD77;
+		-webkit-box-shadow: 0 0 12px #BCDD77;
+		cursor: pointer;
+	}
+		article.book > header a.title {
 			text-decoration: none;
 		}
-		article.book > div.image > a > img {
-			border: 1px solid #8DBB2F;
+		article.book > header div.image,
+		article.book > header div.info {
+			float: left;
 		}
-		article.book > div.image.no-thumb > a,
-		article.book > div.image.no-thumb > span {
-			background: #FFFFFF;
-			border: 1px solid #8DBB2F;
-			display: block;
-			height: 46px;
-			width: 46px;
-			padding: 16px 6px;
+		article.book > header div.image {
+			margin-right: 12px;
+			width: 80px;
 		}
-
-article.book > div.ads {
-	background: #FAFAFA;
-	border: 1px solid #EEEEEE;
-	border-width: 1px 0;
-	clear: both;
-	color: #CCCCCC;
-	font-family: Helvetica, Arial, sans-serif;
-	font-size: small;
-	margin-top: 12px;
-	padding: 3px 6px;
-	text-shadow: 1px 1px 0 #FFFFFF;
-}
-
-article.book > div.details {
-	clear: both;
-	margin-top: 12px;
-}
-	article.book > div.details > div {
-		float: left;
-		padding: 0 10px 10px 0;
-		vertical-align: top;
-	}
-	article.book > div.details > div:last-child {
-		padding-right: 0;
-	}
-	article.book > div.details > div > div.wrap {
-		background: #EEE;
-		padding: 6px;
-	}
-
-	article.book > div.details > div.prices {
-		width: 453px;
-	}
-		article.book > div.details > div.prices table {
-			background: #FFF;
-			border-collapse: collapse;
-			width: 100%;
-			margin-bottom: 0;
-			-moz-box-shadow: 1px 1px 0 #FFF;
+		article.book > header div.info {
+			width: 480px;
 		}
-		article.book > div.details > div.prices td,
-		article.book > div.details > div.prices th {
-			border: 1px solid #CCC;
-			font-weight: bold;
-			padding: 3px;
-		}
-		article.book > div.details > div.prices th {
-			text-align: left;
-		}
-		article.book > div.details > div.prices th[scope=col] {
-			background: #F5F5F5;
-			font-style: italic;
-		}
-		article.book > div.details > div.prices a {
-			color: inherit;
-			text-decoration: none;
-		}
-		article.book > div.details > div.prices td.loading {
-			background-image: url('../img/loading.gif');
-			background-position: 50% 50%;
-			background-repeat: no-repeat;
-			color: #CCC;
-			font-weight: normal;
-			font-family: Helvetica, Arial, sans-serif;
-			font-size: small;
-			text-indent: -90210px;
-		}
-		article.book > div.details > div.prices td.none {
-			color: #888;
-			font-weight: normal;
-		}
-		article.book > div.details > div.prices tr:hover {
-			background: #FFFFEE;
-		}
-		article.book > div.details > div.prices tr.lowest {
-			background: #FFFFDD;
-		}
-		article.book > div.details > div.prices tr.lowest:hover {
-			background: #FFFFD0;
-		}
-		article.book > div.details > div.prices tr.loaded {
-			cursor: pointer;
-		}
-			article.book > div.details > div.prices tr.lowest span {
-				color: #888;
-				font-weight: normal;
-				font-family: Helvetica, Arial, sans-serif;
-				font-size: small;
-				padding-left: 6px;
+			article.book > header > div.image a {
+				color: #8DBB2F;
+				text-decoration: none;
+			}
+			article.book > header > div.image img {
+				border: 1px solid #8DBB2F;
+			}
+			article.book > header > div.image.no-thumb a,
+			article.book > header > div.image.no-thumb span {
+				border: 1px solid #8DBB2F;
+				color: #BBBBBB;
+				display: block;
+				font-size: 13px;
+				height: 36px;
+				line-height: 18px;
+				padding: 22px 6px;
+				text-align: center;
+				width: 43px;
 			}
 
-	article.book > div.details > div.external {
-		width: 123px;
-		text-align: center;
+article.book > section.details > section {
+	float: left;
+	margin-right: 10px;
+	margin-bottom: 10px;
+}
+article.book > section.details > section:last-child {
+	margin-right: 0;
+}
+article.book > section.details > section.sub {
+	text-align: center;
+	width: 120px;
+}
+	article.book > section.details > section.sub h3,
+	article.book > section.details > section.sub p {
+		margin-bottom: 6px;
 	}
-		article.book > div.details > div.external p,
-		article.book > div.details > div.external h3 {
-			margin-bottom: 3px;
+	article.book > section.details > section.sub h3 {
+		text-shadow: 1px 1px 0 #FFFFFF;
+	}
+	article.book > section.details > section.sub a {
+		color: #777777;
+	}
+	article.book > section.details > section.sub p.sp {
+		color: #777777;
+	}
+	article.book > section.details > section.sub p:last-child {
+		margin-bottom: 0;
+	}
+	article.book > section.details > section > div.wrap {
+		background: #EEEEEE;
+		padding: 6px;
+	}
+	article.book > section.details > section.sub div.wrap {
+		min-height: 83px;
+	}
+
+article.book section.prices {
+	width: 480px;
+}
+	section.prices p.help {
+		margin-bottom: 6px;
+	}
+	table.prices {
+		background-color: #FFFFFF;
+		border-collapse: collapse;
+		-moz-box-shadow: 1px 1px 0 #FFFFFF;
+		margin-bottom: 0;
+		width: 100%;
+	}
+		table.prices td,
+		table.prices th {
+			border: 1px solid #CCCCCC;
+			text-align: center;
+			padding: 4px;
 		}
-		article.book > div.details > div.external a {
-			color: #777;
-			font-family: Helvetica, Arial, sans-serif;
-			font-weight: bold;
-			text-shadow: 1px 1px 0 #FFF;
-			text-decoration: none;
+		table.prices th[scope=col] {
+			background-color: #DDDDDD;
+			font-style: italic;
+			text-shadow: 1px 1px 0 #F4F4F4;
 		}
-		article.book > div.details > div.external p.sponsored {
-			color: #AAA;
-			font-family: Helvetica, Arial, sans-serif;
-			text-shadow: 1px 1px 0 #FFF;
+		table.prices th.store {
+			text-align: left;
 		}
-		article.book > div.details > div.external p:last-child {
-			margin-bottom: 0;
+		table.prices tr.none {
+			opacity: 0.25;
 		}
+			table.prices th span {
+				float: right;
+				font-family: Helvetica, Arial, sans-serif;
+				font-size: 13px;
+				font-weight: normal;
+			}
+			table.prices tr.loading td.price {
+				background-image: url('../img/loading.gif');
+				background-position: 50% 50%;
+				background-repeat: no-repeat;
+				text-indent: -90210px;
+			}
+			table.prices tr.priced td.price {
+				font-weight: bold;
+			}
+			table.prices tr.lowest th,
+			table.prices tr.lowest td {
+				background: #FFFFAA;
+			}
+			table.prices tr.multi th,
+			table.prices tr.multi td,
+			table.prices tr.sub th,
+			table.prices tr.sub td {
+				border-bottom: 1px solid #DFDFDF;
+			}
+				table.prices tr.sub th.store {
+					padding-left: 6px;
+				}
+				table.prices tr.sub th.store:before {
+					content: "\25B6";
+					color: #BBBBBB;
+					padding-right: 6px;
+				}
+			table.prices tr.priced:hover {
+				background: #FFFFCE;
+				cursor: pointer;
+			}
 
 p.field input, p.field textarea {
 	font: 13px/18px Helvetica, Arial, sans-serif;
@@ -437,64 +432,4 @@ form span.error {
 	background: #EEE;
 	text-align: center;
 	padding: 6px;
-}
-
-/*	Layout for smaller screens
- 	480px - 767px */
-
-@media only screen and (max-width: 767px) and (min-width: 480px) {
-
-	div.container {
-		width: 460px;
-	}
-	div.search-bar {
-		width: 302px;
-	}
-	div.search-bar input[name=q] {
-		width: 212px;
-	}
-	#main div.search-bar input[name=q] {
-		width: 333px;
-	}
-	article.book > div.details > div.prices {
-		width: 293px;
-	}
-	p.field input, p.field textarea {
-		width: 440px;
-	}
-
-}
-
-/*	Layout for mobile devices
- 	< 480px */
-
-@media only screen and (max-width: 479px) {
-
-	div.container {
-		width: 300px;
-	}
-	div.search-bar {
-		width: auto;
-	}
-	div.search-bar input[name=q] {
-		width: 175px;
-	}
-	#main div.search-bar input[name=q] {
-		width: 173px;
-	}
-	#top form {
-		padding-top: 6px;
-	}
-	#logo {
-		background-position: 50% top;
-		float: none;
-		width: auto;
-	}
-	article.book > div.details > div.prices {
-		width: 276px;
-	}
-	p.field input, p.field textarea {
-		width: 280px;
-	}
-
 }
