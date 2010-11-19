@@ -262,6 +262,11 @@ article.book > section.details > section.sub {
 	article.book > section.details > section.sub div.wrap {
 		min-height: 83px;
 	}
+	article.book > section.details > section.sub.facebook div.wrap {
+		background: transparent;
+		min-height: inherit;
+		padding: 0 9px;
+	}
 
 article.book section.prices {
 	width: 480px;
