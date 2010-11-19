@@ -6,8 +6,8 @@
 		$(function(){
 			var book = {
 				"isbn": '{{ book.isbn13 }}',
-				"title": '{{ book.title }}',
-				"author": '{{ book.authors|join(' ') }}'
+				"title": '{{ book.title|replace("'", "\\'") }}',
+				"author": '{{ book.authors|join(' ')|replace("'", "\\'") }}'
 			};
 			$.Bookshop.init(book);
 		});
