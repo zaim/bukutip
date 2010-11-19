@@ -53,7 +53,7 @@ class Book(db.Model):
     def __init__(self, *args, **kwargs):
         # automatically generate key_name
         isbn10 = kwargs.get('isbn10')
-        isbn13 = kwargs.get('isbn13', pyisbn.convert(isbn10))
+        isbn13 = kwargs.get('isbn13', (pyisbn.convert(isbn10) if isbn10 else None))
         if isbn13:
             kwargs['key_name'] = 'book:%s' % isbn13
         super(Book, self).__init__(*args, **kwargs)
