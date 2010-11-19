@@ -4,6 +4,7 @@ import urllib2
 import urlparse
 import time
 import booksearch
+import pyisbn
 import settings
 from cgi import parse_qsl
 from collections import defaultdict
@@ -51,9 +52,10 @@ class Book(db.Model):
 
     def __init__(self, *args, **kwargs):
         # automatically generate key_name
-        if 'isbn13' in kwargs and kwargs['isbn13']:
-            isbn = kwargs['isbn13']
-            kwargs['key_name'] = 'book:%s' % isbn
+        isbn10 = kwargs.get('isbn10')
+        isbn13 = kwargs.get('isbn13', pyisbn.convert(isbn10))
+        if isbn13:
+            kwargs['key_name'] = 'book:%s' % isbn13
         super(Book, self).__init__(*args, **kwargs)
         self.links = LinkAttribute(self)
 
@@ -92,8 +94,13 @@ class Book(db.Model):
 
     @classmethod
     def get_by_isbn(cls, isbn, create=True, defaults=None):
-        if not Book.ISBN13_REGEX.match(isbn):
-            raise ValueError('Illegal ISBN value: %s' % isbn)
+        if len(isbn) == 10:
+            # NOTE: always use ISBN-13
+            # this should also raise an exception if isbn is invalid
+            isbn = pyisbn.convert(isbn)
+
+        if not pyisbn.validate(isbn):
+            raise ValueError('Invalid ISBN: %s' % isbn)
 
         memkey = 'book:%s' % isbn
         book = memcache.get(memkey)

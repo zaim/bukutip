@@ -3,7 +3,6 @@ import booksearch
 import bookshop
 import crawler
 import settings
-import pyisbn
 import models
 from collections import defaultdict
 from google.appengine.api import memcache, mail, users
@@ -35,8 +34,7 @@ class SearchHandler(handlers.HTMLHandler):
 
         # modify query to do an ISBN: keyword search if given query is one
         if models.Book.ISBN13_REGEX.match(query) or models.Book.ISBN10_REGEX.match(query):
-            isbn = pyisbn.convert(query) if len(query) == 10 else query
-            query = 'isbn:%s' % isbn
+            query = 'isbn:%s' % query
 
         context = {
             "page_title": u'Search: "%s"' % query,
@@ -188,7 +186,7 @@ application = webapp.WSGIApplication([
     (r'/', MainHandler),
     (r'/search', SearchHandler),
     (r'/price', PriceHandler),
-    (r'/([0-9]{13})', BookHandler),
+    (r'/([0-9]{10}|[0-9]{13})', BookHandler),
     (r'/feedback(/send)?', FeedbackHandler),
     (r'/tasks/crawl', BookSourceTaskHandler),
 ], debug=settings.DEBUG)
