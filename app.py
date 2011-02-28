@@ -1,3 +1,4 @@
+import fixpath
 import logging
 import booksearch
 import bookshop
