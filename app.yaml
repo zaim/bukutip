@@ -1,5 +1,5 @@
 application: bukutip
-version: 004a
+version: 0.1-beta
 runtime: python
 api_version: 1
 
