@@ -17,3 +17,6 @@ pip-log.txt
 # Unit test / coverage reports
 .coverage
 .tox
+
+# Active settings file
+settings.py
