@@ -1,0 +1,14 @@
+Source code for the web app BukuTip at http://bukutip.appspot.com/
+
+Search and compare book prices from various bookstores in Malaysia.
+
+- Uses Google App Engine (using the built-in webapp framework)
+- Uses ISBNDB and Amazon API to search for books.
+- Screen scrapes Malaysian bookstore websites to search for prices,
+  currently searches MPHOnline.com, TimesBookstores.com.my, Kinonuniya
+  and Mudah.my.
+
+See the screen scraping code in the `bookshop.py` file. Patches to
+the code for when the bookstore's HTML changes are most welcomed.
+
+Released under the GNU AGPL, see COPYING.
