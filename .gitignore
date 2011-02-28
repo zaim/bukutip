@@ -18,5 +18,6 @@ pip-log.txt
 .coverage
 .tox
 
-# Active settings file
+# Active settings files
 settings.py
+cron.yaml
