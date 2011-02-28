@@ -1,3 +1,5 @@
+"""Utility to generate cron.yaml tasks for crawling bookxcess.com"""
+
 import datetime
 import sys
 import time
@@ -127,6 +129,8 @@ def run_cron(out=True):
 
 def help(out=True):
     print "Syntax: %s [generate_yaml|run_cron|help]" % sys.argv[0]
+    print "  generate_yaml - Outputs cron.yaml settings for crawling bookxcess.com."
+    print "  run_cron      - Manually run cron tasks on localhost, will prompt before run."
 
 def main():
     cmd = 'help'
