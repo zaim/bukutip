@@ -405,6 +405,9 @@ form span.error {
 #content {
 	clear: both;
 }
+	#content.read h1, #content.read h2, #content.read h3 {
+		margin-bottom: 8px;
+	}
 
 #bottom {
 	clear: both;
