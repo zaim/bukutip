@@ -441,3 +441,17 @@ form span.error {
 	text-align: center;
 	padding: 6px;
 }
+
+#share-tools {
+	clear: both;
+	height: 65px;
+	margin-bottom: 24px;
+}
+	#share-tools div {
+		float: left;
+		padding: 0 122px;
+		width: 55px;
+	}
+#paypal {
+	text-align: center;
+}
