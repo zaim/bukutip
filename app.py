@@ -193,6 +193,7 @@ application = webapp.WSGIApplication([
 ], debug=settings.DEBUG)
 
 def main():
+    fixpath.fix()
     util.run_wsgi_app(application)
 
 if __name__ == '__main__':
