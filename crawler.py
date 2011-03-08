@@ -4,7 +4,7 @@ import cron
 import settings
 from urlparse import urlsplit
 from os.path import splitext, basename
-from google.appengine.api.labs import taskqueue
+from google.appengine.api import taskqueue
 from google.appengine.ext import webapp
 from google.appengine.ext.deferred import deferred
 from BeautifulSoup import BeautifulSoup, BeautifulStoneSoup
