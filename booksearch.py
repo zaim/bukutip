@@ -5,7 +5,7 @@ import re
 import urllib
 import urllib2
 import settings
-import django.utils.simplejson as json
+import simplejson as json
 from collections import defaultdict
 from datetime import datetime
 from google.appengine.api import memcache
