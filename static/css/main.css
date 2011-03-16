@@ -411,14 +411,12 @@ form span.error {
 
 #bottom {
 	clear: both;
-	color: #CCCCCC;
+	color: #888888;
 	text-align: center;
 	padding-top: 24px;
 }
-	#bottom a.zw,
-	#bottom p.user a {
-		color: #CCCCCC;
-		font-weight: bold;
+	#bottom p.misc {
+		font-family: Helvetica, Arial, sans-serif;
 	}
 
 #terms p.cc img {

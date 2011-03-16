@@ -7,7 +7,7 @@ handlers:
 
 # static
 - url: /static
-  static_dir: static  
+  static_dir: static
 - url: /pages/(.*)\.html
   static_files: static/html/\1.html
   upload: static/html/(.*)\.html
